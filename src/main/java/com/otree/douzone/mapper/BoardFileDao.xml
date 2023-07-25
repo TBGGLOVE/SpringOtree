@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.otree.douzone.dao.BoardFileDao">
+
+
+
+	<select id="getFile" resultType="com.otree.douzone.dto.BoardFile">
+		SELECT fileId, boardId, fileSrc 
+		FROM boardfile
+	
+	</select>
+
+	<insert id="insertFile" parameterType="java.util.ArrayList">
+		 INSERT INTO boardfile (fileId, boardId, fileSrc) VALUES
+        <foreach item="insert" collection="list" separator=",">
+            (fileid_seq.NEXTVAL, #{insert.boardId}), #{insert.fileSrc})
+        </foreach>
+	</insert>
+	
+	
+	<update id="updateFile" parameterType="com.otree.douzone.dto.BoardFile">
+	UPDATE boardfile
+	SET fileSrc= #{fileSrc}
+	WHERE fileId = #{fileId}
+	</update>
+	
+	<delete id="deleteFile" parameterType="com.otree.douzone.dto.BoardFile">
+	DELETE FROM boardfile
+	WHERE fileId=#{fileId}
+	</delete>
+	
+	
+</mapper>
